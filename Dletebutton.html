@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>List of Books</title>
+<style>
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+    h4{
+        text-align: center;
+    }
+
+    button {
+        float: right;
+        margin-left: 10px;
+        padding: 8px 16px; 
+        font-size: 14px; 
+        color: red;
+    }
+</style>
+</head>
+<body>
+    <h4>List of Books</h4>
+    <ul id="book-list"></ul>
+
+    <script>
+        
+        const books = [
+            { title: 'The Lord of the Rings', author: 'John Ronald Reuel Tolkien', genre: 'Classic' },
+            { title: 'To Kill a Mockingbird', author: 'Harper Lee', genre: 'Fiction' },
+            { title: '1984', author: 'George Orwell', genre: 'Dystopian' },
+            { title: 'Pride and Prejudice', author: 'Jane Austen', genre: 'Romance' },
+            { title: 'The Catcher in the Rye', author: 'J.D. Salinger', genre: 'Coming-of-age' }
+        ];
+
+        
+        function renderBookList() {
+            const bookListContainer = document.getElementById('book-list');
+            bookListContainer.innerHTML = ''; 
+
+            books.forEach((book, index) => {
+                const bookItem = document.createElement('li');
+                bookItem.innerHTML = `
+                    <strong>Title:</strong> ${book.title}<br>
+                    <strong>Author:</strong> ${book.author}<br>
+                    <strong>Genre:</strong> ${book.genre}
+                `;
+
+                const deleteButton = document.createElement('buttons');
+                deleteButton.textContent = 'Delete';
+                deleteButton.addEventListener('click', () => {
+                    deleteBook(index);
+                });
+
+                bookItem.appendChild(deleteButton);
+                bookListContainer.appendChild(bookItem);
+            });
+        }
+
+        
+        function deleteBook(index) {
+            books.splice(index, 1);
+            renderBookList(); 
+        }
+
+        
+        renderBookList();
+    </script>
+</body>
+</html>
+
